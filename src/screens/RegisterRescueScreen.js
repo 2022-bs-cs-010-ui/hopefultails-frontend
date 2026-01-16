@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Form,Row,Col} from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import {useDispatch,useSelector} from 'react-redux'
 import {logoutUser} from '../actions/userActions'
@@ -19,8 +20,8 @@ const RegisterRescueScreen = ({location,history}) =>{
     const userLogin = useSelector(state=>state.userLogin)
     const {userInfo} = userLogin
     const [cordinates, setCordinates] = useState({});
-    const [lat,setLat] = useState(0.0);
-    const [lng,setLng] = useState(0.0);
+    const [lat,setLat] = useState(0);
+    const [lng,setLng] = useState(0);
     const [data, setData] = useState({  
         title: "",
         background: "",
@@ -163,6 +164,13 @@ const RegisterRescueScreen = ({location,history}) =>{
        </div>
        
           )
+}
+
+RegisterRescueScreen.propTypes = {
+  location: PropTypes.object.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 }
 
 export default RegisterRescueScreen

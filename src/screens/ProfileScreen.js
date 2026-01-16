@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Form,Button,Row,Col,Table} from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -10,8 +11,7 @@ import VetAppointmentScreen from './vetAppointmentsScreen';
 import RescueReportScreen from './rescueReportScreen';
 import axios from 'axios';
 
-const ProfileScreen = ({history}) =>{
-    const dispatch=useDispatch()
+const ProfileScreen = ({history}) =>{const dispatch=useDispatch()
     
     const [email,setEmail] = useState('')
     const [name,setName] = useState('')
@@ -297,4 +297,11 @@ const ProfileScreen = ({history}) =>{
     </div>
     )
 }
+
+ProfileScreen.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+}
+
 export default ProfileScreen

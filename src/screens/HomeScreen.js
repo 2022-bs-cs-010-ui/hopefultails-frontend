@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
-import { LinkContainer } from 'react-router-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import ErrorBoundary from '../components/ErrorBoundary'
