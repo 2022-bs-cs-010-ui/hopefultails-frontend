@@ -16,31 +16,91 @@ const Header=()=> {
     dispatch(logoutUser())
   }
     return (
-        <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000, width: '100%', }}>
-          <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
+        <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000, width: '100%' }}>
+          <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect className="py-1">
         <Container>
 
 <LinkContainer to='/'>
-  <Navbar.Brand  >Hopeful Tails</Navbar.Brand>
+  <Navbar.Brand style={{ fontSize: '1rem', paddingTop: 0, paddingBottom: 0 }}>Hopeful Tails</Navbar.Brand>
  </LinkContainer>
  
  <Navbar.Toggle aria-controls="basic-navbar-nav" />
  
  <Navbar.Collapse id="basic-navbar-nav">
  <Nav className="mr-auto">
+ {
+   userInfo&&!userInfo.vet&&!userInfo.rescue&&!userInfo.service_provider&&(
+
+     <>
+     <LinkContainer to='/rescue-teams'>
+     <Nav.Link ><i className="far fa-life-ring"></i>{" "}Rescue Report</Nav.Link>
+  </LinkContainer>
+
+  <LinkContainer to='/vets'>
+     <Nav.Link ><i className="fa fa-plus-square" style={{"color":"red"}}></i>{" "}Vet Help</Nav.Link>
+  </LinkContainer>
+
+  <LinkContainer to='/service-providers'>
+     <Nav.Link ><i></i>{" "}Services</Nav.Link>
+  </LinkContainer>
+
+  <NavDropdown title = "Become a" id='username'>
+   
+     
+    <LinkContainer to='/register-vet'>
+    <NavDropdown.Item>VET</NavDropdown.Item>
+    </LinkContainer>
+
+    <LinkContainer to='/register-rescue'>
+    <NavDropdown.Item>RESCUER </NavDropdown.Item>
+    </LinkContainer>
+    <LinkContainer to='/register-service-provider'>
+    <NavDropdown.Item>SERVICE PROVIDER </NavDropdown.Item>
+    </LinkContainer>
+
+   </NavDropdown>
+     </>
+   )
+
+ }
+
+   {userInfo?.isAdmin && (  
+
+ <NavDropdown title = "Admin" id='Admin-queue'>
+
+   
+ <LinkContainer to='/admin/userlist'>
+ <NavDropdown.Item>usersList</NavDropdown.Item>
+ </LinkContainer>
+
+ <LinkContainer to='/admin/orders'>
+ <NavDropdown.Item>orders</NavDropdown.Item>
+ </LinkContainer>
+
+ <LinkContainer to='/admin/products'>
+ <NavDropdown.Item>products</NavDropdown.Item>
+ </LinkContainer>
+
+ </NavDropdown>
+
+ )}  
+ </Nav>
+
+ <Nav className="ml-auto">
  
  { userInfo&&!userInfo.vet&&(
   <LinkContainer to='/Cart'>
-    <Nav.Link ><i className="fas fa-shopping-cart"></i>{" "}Cart</Nav.Link>
+    <Nav.Link ><i className="fas fa-shopping-cart"></i>{" "}</Nav.Link>
  </LinkContainer>
  )
 }
 
  {userInfo ? (  
 
-  <NavDropdown title = {userInfo.name} id='username'>
+  <NavDropdown title={<i className="fas fa-user" aria-hidden="true"></i>} id='username'>
   
-    
+   <NavDropdown.Item disabled>{userInfo.name}</NavDropdown.Item>
+   <NavDropdown.Divider />
    <LinkContainer to='/profile'>
    <NavDropdown.Item>PROFILE</NavDropdown.Item>
    </LinkContainer>
@@ -52,63 +112,6 @@ const Header=()=> {
  ):  (<LinkContainer to='/Login'>
       <Nav.Link ><i className="fas fa-user "></i>Login</Nav.Link>
 </LinkContainer>)}
-{
-  userInfo&&!userInfo.vet&&!userInfo.rescue&&!userInfo.service_provider&&(
-
-    <>
-    <LinkContainer to='/rescue-teams'>
-    <Nav.Link ><i className="far fa-life-ring"></i>{" "}Rescue Report</Nav.Link>
- </LinkContainer>
-
- <LinkContainer to='/vets'>
-    <Nav.Link ><i className="fa fa-plus-square" style={{"color":"red"}}></i>{" "}Vet Help</Nav.Link>
- </LinkContainer>
-
- <LinkContainer to='/service-providers'>
-    <Nav.Link ><i></i>{" "}Services</Nav.Link>
- </LinkContainer>
-
- <NavDropdown title = "Become a" id='username'>
-  
-    
-   <LinkContainer to='/register-vet'>
-   <NavDropdown.Item>VET</NavDropdown.Item>
-   </LinkContainer>
-
-   <LinkContainer to='/register-rescue'>
-   <NavDropdown.Item>RESCUER </NavDropdown.Item>
-   </LinkContainer>
-   <LinkContainer to='/register-service-provider'>
-   <NavDropdown.Item>SERVICE PROVIDER </NavDropdown.Item>
-   </LinkContainer>
-
-  </NavDropdown>
-    </>
-  )
-
-}
-
-  {userInfo?.isAdmin && (  
-
-<NavDropdown title = "Admin" id='Admin-queue'>
-
-  
-<LinkContainer to='/admin/userlist'>
-<NavDropdown.Item>usersList</NavDropdown.Item>
-</LinkContainer>
-
-<LinkContainer to='/admin/orders'>
-<NavDropdown.Item>orders</NavDropdown.Item>
-</LinkContainer>
-
-<LinkContainer to='/admin/products'>
-<NavDropdown.Item>products</NavDropdown.Item>
-</LinkContainer>
-
-</NavDropdown>
-
-)}  
- 
  </Nav>
  
  </Navbar.Collapse>
