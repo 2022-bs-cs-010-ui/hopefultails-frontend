@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  /* Multi-line truncation utilities (keeps Tailwind-style API without extra plugins) */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}
+
 /* Tailwind design tokens (CSS variables)
    These are based on colors already present in this project:
    - primary:  #ff6b6b  (from your previous tailwind config)
