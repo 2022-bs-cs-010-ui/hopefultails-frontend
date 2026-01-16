@@ -12,8 +12,6 @@ const HomeScreen = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
-  const [categoryFilter, setCategoryFilter] = useState('All')
-  const [brandFilter, setBrandFilter] = useState('All')
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
 
@@ -43,16 +41,6 @@ const HomeScreen = () => {
     }
   }, [])
 
-  const categories = useMemo(() => {
-    const values = products.map((product) => product?.category).filter(Boolean)
-    return Array.from(new Set(values))
-  }, [products])
-
-  const brands = useMemo(() => {
-    const values = products.map((product) => product?.brand).filter(Boolean)
-    return Array.from(new Set(values))
-  }, [products])
-
   const filteredProducts = useMemo(() => {
     const min = minPrice === '' ? null : Number(minPrice)
     const max = maxPrice === '' ? null : Number(maxPrice)
@@ -62,30 +50,26 @@ const HomeScreen = () => {
       const nameMatch = product?.name
         ? product.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
         : false
-      const categoryMatch = categoryFilter === 'All' || product?.category === categoryFilter
-      const brandMatch = brandFilter === 'All' || product?.brand === brandFilter
       const priceValue = Number(product?.price ?? 0)
       const minMatch = min === null || priceValue >= min
       const maxMatch = max === null || priceValue <= max
 
-      return nameMatch && categoryMatch && brandMatch && minMatch && maxMatch
+      return nameMatch && minMatch && maxMatch
     })
-  }, [products, searchTerm, categoryFilter, brandFilter, minPrice, maxPrice])
+  }, [products, searchTerm, minPrice, maxPrice])
 
   const handleClearFilters = () => {
     setSearchTerm('')
-    setCategoryFilter('All')
-    setBrandFilter('All')
     setMinPrice('')
     setMaxPrice('')
   }
 
   return (
     <ErrorBoundary>
-      <div>
-        <Row>
-          <Col md={3}>
-            <Card>
+      <div className="pt-3">
+        <Row style={{ height: 'calc(100vh - 200px)' }}>
+          <Col md={3} style={{ height: '100%' }}>
+            <Card style={{ height: '100%' }}>
               <Card.Body>
                 <Card.Title>Search & Filters</Card.Title>
                 <Form>
@@ -97,38 +81,6 @@ const HomeScreen = () => {
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                  </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="category">
-                    <Form.Label>Category</Form.Label>
-                    <Form.Control
-                      as="select"
-                      value={categoryFilter}
-                      onChange={(e) => setCategoryFilter(e.target.value)}
-                    >
-                      <option value="All">All</option>
-                      {categories.map((category) => (
-                        <option key={category} value={category}>
-                          {category}
-                        </option>
-                      ))}
-                    </Form.Control>
-                  </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="brand">
-                    <Form.Label>Brand</Form.Label>
-                    <Form.Control
-                      as="select"
-                      value={brandFilter}
-                      onChange={(e) => setBrandFilter(e.target.value)}
-                    >
-                      <option value="All">All</option>
-                      {brands.map((brand) => (
-                        <option key={brand} value={brand}>
-                          {brand}
-                        </option>
-                      ))}
-                    </Form.Control>
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="minPrice">
@@ -160,22 +112,24 @@ const HomeScreen = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={9}>
+          <Col md={9} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <h1>LATEST PRODUCTS</h1>
             {error && <Message variant="danger">{error}</Message>}
             {loading && <Loader />}
-            {!loading && filteredProducts.length > 0 && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                {filteredProducts.map((val, idx) => (
-                  <div key={val?._id ?? idx} style={{ width: '100%' }}>
-                    {val ? <Product product={val} /> : null}
-                  </div>
-                ))}
-              </div>
-            )}
-            {!loading && filteredProducts.length === 0 && (
-              <Message variant="info">No products match your filters.</Message>
-            )}
+            <div style={{ flex: 1, overflowY: 'auto', paddingRight: '8px' }}>
+              {!loading && filteredProducts.length > 0 && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  {filteredProducts.map((val, idx) => (
+                    <div key={val?._id ?? idx} style={{ width: '100%' }}>
+                      {val ? <Product product={val} /> : null}
+                    </div>
+                  ))}
+                </div>
+              )}
+              {!loading && filteredProducts.length === 0 && (
+                <Message variant="info">No products match your filters.</Message>
+              )}
+            </div>
           </Col>
         </Row>
       </div>
