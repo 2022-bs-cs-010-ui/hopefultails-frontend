@@ -25,6 +25,7 @@ import mapStyles from "./mapStyles";
 // import "./index.css"
 
 const libraries = ["places"];
+const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 const mapContainerStyle = {
   height: "45vh",
   width: "40vw",
@@ -37,7 +38,7 @@ const options = {
 
 export default function Try(props) {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyC3ALwqrIwXFt9C8iGfrBXxUkLYV-Uiccg",
+    googleMapsApiKey: googleMapsApiKey || "",
     libraries,
   });
   // windowFeatures unused; removed to silence linter
@@ -72,6 +73,9 @@ export default function Try(props) {
     mapRef.current.setZoom(14);
   }, []);
 
+  if (!googleMapsApiKey) {
+    return "Missing Google Maps API key. Set REACT_APP_GOOGLE_MAPS_API_KEY and restart.";
+  }
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
