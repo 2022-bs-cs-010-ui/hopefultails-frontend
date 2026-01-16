@@ -66,7 +66,7 @@ const RescueTeamScreen = ({history}) =>{
             :
             error ? <Message>{error}</Message>
             :(
-           <Table striped bordered hover responsive className="table-sm">
+           <Table bordered hover responsive className="table-sm">
                 <thead>
                     <tr>
                         <th>
@@ -96,13 +96,18 @@ const RescueTeamScreen = ({history}) =>{
                                 return(
                                     <tr key={t._id}>
                                         <td>
-                                            {t.name}
-                                            <Row>
-                                            <Col md={6}>
-                                              <Image src={"http://127.0.0.1:8000"+t.image} alt={t.name} fluid rounded/>                                            
-                                              </Col>
-
-                                            </Row>
+                                            <div style={{ width: '200px' }}>
+                                                <div style={{ position: 'relative', width: '180px', height: '180px', overflow: 'hidden', background: 'transparent', padding: '12px', boxSizing: 'border-box', borderRadius: '10px' }}>
+                                                    <Image
+                                                        src={"http://127.0.0.1:8000" + t.image}
+                                                        alt={t.email || t.name}
+                                                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }}
+                                                    />
+                                                </div>
+                                                <div style={{ marginTop: '6px', fontSize: '14px', color: '#333' }}>
+                                                    {t.email}
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>
                                             {t.location}
