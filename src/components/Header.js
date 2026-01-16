@@ -87,8 +87,8 @@ const Header=()=> {
   )
 
 }
-{
-  userInfo && userInfo.isAdmin &&(  
+
+  {userInfo?.isAdmin && (  
 
 <NavDropdown title = "Admin" id='Admin-queue'>
 

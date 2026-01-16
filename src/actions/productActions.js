@@ -13,22 +13,21 @@ import {
 } 
 from '../constants/productConstants';
 
+import { API_ENDPOINTS } from '../config/api'
 import axios from 'axios'
 
 export const listProducts=()=>async (dispatch)=>{
 
     try{
     dispatch({type:PRODUCT_LIST_REQUEST})
-    const {data} =await axios.get('http://127.0.0.1:8000/api/products/')
+    const {data} =await axios.get(API_ENDPOINTS.PRODUCTS)
     dispatch({type:PRODUCT_LIST_SUCCESS,
               payload:data})
         }
         catch(error)
         {   
             dispatch({type:PRODUCT_LIST_FAIL,
-            payload:error.response && error.response.data.detail
-            ?   error.response.data.detail 
-            :   error.message,  
+            payload:error?.response?.data?.detail || error?.message,  
         })
         }
 }
@@ -37,16 +36,14 @@ export const listProducts=()=>async (dispatch)=>{
 export const DetailedProduct=(id)=>async (dispatch)=>{
     try{
     dispatch({type:PRODUCT_DETAILS_REQUEST})
-    const {data} =await axios.get(`http://127.0.0.1:8000/api/products/${id}`)
+    const {data} =await axios.get(API_ENDPOINTS.PRODUCT_DETAIL(id))
     dispatch({type:PRODUCT_DETAILS_SUCCESS,
               payload:data})
         }
         catch(error)
         {   
             dispatch({type:PRODUCT_DETAILS_FAIL,
-            payload:error.response && error.response.data.detail
-            ?   error.response.data.detail 
-            :   error.message,  
+            payload:error?.response?.data?.detail || error?.message,  
         })
         }
 }
@@ -70,7 +67,7 @@ export const deleteProduct=(id)=>async (dispatch,getState)=>{
     }
 
     const {data} =await axios.delete(
-        `http://127.0.0.1:8000/api/products/delete/${id}`,
+        `${API_ENDPOINTS.PRODUCTS}delete/${id}`,
         configuration
     )
     dispatch(
@@ -81,9 +78,7 @@ export const deleteProduct=(id)=>async (dispatch,getState)=>{
         catch(error)
         {   
             dispatch({type:PRODUCT_DELETE_FAIL,
-            payload:error.response && error.response.data.detail
-            ?   error.response.data.detail 
-            :   error.message,  
+            payload:error?.response?.data?.detail || error?.message,  
         })
         }
 }

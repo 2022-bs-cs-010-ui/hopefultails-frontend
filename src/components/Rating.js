@@ -1,7 +1,7 @@
 import React from 'react'
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import PropTypes from 'prop-types'
 
-const Rating=({value,text,color})=> {
+const Rating = ({ value, text, color }) => {
          
     return (
         <div className='rating'>
@@ -66,5 +66,11 @@ const Rating=({value,text,color})=> {
         </div>
     )
             }
+
+Rating.propTypes = {
+  value: PropTypes.number,
+  text: PropTypes.string,
+  color: PropTypes.string,
+}
 
 export default Rating

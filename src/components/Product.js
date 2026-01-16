@@ -1,42 +1,44 @@
 import React from 'react'
-import {Card} from 'react-bootstrap';
+import { Card } from 'react-bootstrap'
 import Rating from './Rating'
+import { Link } from 'react-router-dom'
+import { API_BASE_URL } from '../config/api'
 
-import {Link} from 'react-router-dom'
- 
-const Product=({product})=> {
-    let v=product._id
-    //console.log(22222)
-    //console.log(v)
-    return (
+const Product = ({ product }) => {
+  const v = product._id
+  const imageUrl = product.image ? `${API_BASE_URL}${product.image}` : null
+
+  return (
     <Card className="my-3 p-3 rounded">
-        <Link to={`/product/${v}`}>
-            <Card.Img src={"http://127.0.0.1:8000"+product.image} />
+      <Link to={`/product/${v}`}>
+        {imageUrl ? (
+          <Card.Img src={imageUrl} alt={product.name} />
+        ) : (
+          <div style={{ height: '200px', background: '#f0f0f0' }} />
+        )}
       </Link>
-      
+
       <Card.Body>
-            <Link to={`/product/${v}`}>
-        <Card.Title as="div">
-            <strong> {product.name}</strong>
-        </Card.Title>
-            </Link>
-   
+        <Link to={`/product/${v}`}>
+          <Card.Title as="div">
+            <strong>{product.name}</strong>
+          </Card.Title>
+        </Link>
 
-      <Card.Text as='div'>
-        <div className='my-3'>
-        <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'yellow'}/>
-        </div>
-      </Card.Text>
+        <Card.Text as="div">
+          <div className="my-3">
+            <Rating
+              value={product.rating}
+              text={`${product.numReviews} reviews`}
+              color="yellow"
+            />
+          </div>
+        </Card.Text>
 
-      <Card.Text as='h3'> 
-       ${product.price}        
-      </Card.Text>
-
-
-     </Card.Body>
-
+        <Card.Text as="h3">${product.price}</Card.Text>
+      </Card.Body>
     </Card>
-    )
+  )
 }
 
-export default Product;
+export default Product
