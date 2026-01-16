@@ -78,7 +78,7 @@ export default function Try(props) {
   return (
     <div>
       <h1>
-        PetsWala{""}
+        Hopeful Tails{""}
         <span role="img" aria-label="dog">
         🐕
         </span>
