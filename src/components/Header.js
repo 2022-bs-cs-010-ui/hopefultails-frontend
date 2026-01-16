@@ -16,8 +16,8 @@ const Header=()=> {
     dispatch(logoutUser())
   }
     return (
-        <header>
-        <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect  >
+        <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000, width: '100%' }}>
+          <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
         <Container>
 
 <LinkContainer to='/'>

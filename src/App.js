@@ -30,11 +30,12 @@ import ServiceProvidersListScreen from './screens/ServiceProvidersListScreen'
 
 function App() {
   return (
-    <Router >
-    <Header/>
-    <main className="py-5">
-    <Container>
-      <Route path='/' component={HomeScreen} exact/>
+    <Router>
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <Header/>
+        <main style={{ flex: 1, paddingTop: '80px', paddingBottom: '80px', paddingLeft: '20px', paddingRight: '20px' }}>
+          <Container>
+        <Route path='/' component={HomeScreen} exact/>
       <Route path='/login' component={LoginScreen} />
       <Route path='/register' component={RegisterScreen} />
       <Route path='/profile' component={ProfileScreen} />
@@ -60,8 +61,9 @@ function App() {
       <Route path='/register-service-provider' component={RegisterServiceProviderScreen}/>
      
       </Container>
-    </main>
-    <Footer/>
+        </main>
+        <Footer/>
+      </div>
     </Router>
   );
 }
