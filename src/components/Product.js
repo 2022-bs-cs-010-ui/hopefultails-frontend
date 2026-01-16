@@ -4,32 +4,32 @@ import Rating from './Rating'
 
 import {Link} from 'react-router-dom'
  
-const Product=({props})=> {
-    let v=props._id
+const Product=({product})=> {
+    let v=product._id
     //console.log(22222)
     //console.log(v)
     return (
     <Card className="my-3 p-3 rounded">
         <Link to={`/product/${v}`}>
-            <Card.Img src={"http://127.0.0.1:8000"+props.image} />
+            <Card.Img src={"http://127.0.0.1:8000"+product.image} />
       </Link>
       
       <Card.Body>
             <Link to={`/product/${v}`}>
         <Card.Title as="div">
-            <strong> {props.name}</strong>
+            <strong> {product.name}</strong>
         </Card.Title>
             </Link>
    
 
       <Card.Text as='div'>
         <div className='my-3'>
-        <Rating propsue={props.rating} text={`${props.numReviews} reviews`} color={'yellow'}/>
+        <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'yellow'}/>
         </div>
       </Card.Text>
 
       <Card.Text as='h3'> 
-       ${props.price}        
+       ${product.price}        
       </Card.Text>
 
 

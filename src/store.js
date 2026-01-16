@@ -7,8 +7,8 @@ import {
         productDeleteReducer
        } from './reducers/productReducers'
 import {cartReducer} from './reducers/cartReducers'
-import {userLoginReducer} from './reducers/userReducers'
 import { 
+            userLoginReducer,
             userRegisterReducer,
             userDetailsReducer,
             userUpdateReducer,
