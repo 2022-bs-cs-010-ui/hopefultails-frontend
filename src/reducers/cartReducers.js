@@ -6,7 +6,9 @@ import {
     CLEAR_CART
 } from '../constants/cartConstants'
 
-export const cartReducer = ( state = { cartItems :[], shippingAddress:{}, paymentMethod:{}  }, action ) => {
+const CART_INITIAL_STATE = { cartItems: [], shippingAddress: {}, paymentMethod: {} }
+
+export const cartReducer = (state = CART_INITIAL_STATE, action) => {
     switch(action.type){
     case ADD_TO_CART:
         const item = action.payload

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Card } from 'react-bootstrap'
 import Rating from './Rating'
 import { Link } from 'react-router-dom'
@@ -42,3 +43,14 @@ const Product = ({ product }) => {
 }
 
 export default Product
+
+Product.propTypes = {
+  product: PropTypes.shape({
+    _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+    image: PropTypes.string,
+    rating: PropTypes.number,
+    numReviews: PropTypes.number,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  }).isRequired,
+}
