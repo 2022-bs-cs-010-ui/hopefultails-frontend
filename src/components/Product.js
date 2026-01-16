@@ -6,43 +6,33 @@ import { Link } from 'react-router-dom'
 import { API_BASE_URL } from '../config/api'
 
 const Product = ({ product }) => {
-  const v = product._id
-  const imageUrl = product.image ? `${API_BASE_URL}${product.image}` : null
+  const v = product?._id
+  const imageUrl = product?.image ? `${API_BASE_URL}${product.image}` : null
 
   return (
     <Card className="my-3 p-3 rounded">
       <Link to={`/product/${v}`}>
-        {imageUrl ? (
-          <Card.Img src={imageUrl} alt={product.name} />
-        ) : (
-          <div style={{ height: '200px', background: '#f0f0f0' }} />
-        )}
+        <Card.Img src={imageUrl || '/images/sample.jpg'} alt={product?.name} variant="top" />
       </Link>
 
       <Card.Body>
         <Link to={`/product/${v}`}>
           <Card.Title as="div">
-            <strong>{product.name}</strong>
+            <strong>{product?.name}</strong>
           </Card.Title>
         </Link>
 
         <Card.Text as="div">
           <div className="my-3">
-            <Rating
-              value={product.rating}
-              text={`${product.numReviews} reviews`}
-              color="yellow"
-            />
+            <Rating value={product?.rating || 0} text={`${product?.numReviews || 0} reviews`} color="#f8e825" />
           </div>
         </Card.Text>
 
-        <Card.Text as="h3">${product.price}</Card.Text>
+        <Card.Text as="h3">${product?.price ?? '0'}</Card.Text>
       </Card.Body>
     </Card>
   )
 }
-
-export default Product
 
 Product.propTypes = {
   product: PropTypes.shape({
@@ -54,3 +44,5 @@ Product.propTypes = {
     price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }).isRequired,
 }
+
+export default Product
