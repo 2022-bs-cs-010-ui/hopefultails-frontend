@@ -23,11 +23,11 @@ const Product = ({ product }) => {
     <Link to={`/product/${v}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       <Card style={{ marginTop: '12px', marginBottom: '12px', padding: '0', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', display: 'flex', flexDirection: 'row', transition: 'box-shadow 0.3s ease', cursor: 'pointer', height: '220px' }} onMouseEnter={handleHoverEnter} onMouseLeave={handleHoverLeave}>
         {/* Image Section - Left Side */}
-        <div style={{ position: 'relative', width: '220px', height: '220px', overflow: 'hidden', background: '#f0f0f0', flexShrink: 0 }}>
+        <div style={{ position: 'relative', width: '220px', height: '220px', overflow: 'hidden', background: 'transparent', flexShrink: 0, padding: '12px', boxSizing: 'border-box', borderRadius: '10px' }}>
           {imageUrl && !imgError ? (
             <>
               {!loaded && (
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite', borderRadius: '8px' }} />
               )}
               <img
                 src={imageUrl}
@@ -35,11 +35,11 @@ const Product = ({ product }) => {
                 loading="lazy"
                 onLoad={() => setLoaded(true)}
                 onError={() => setImgError(true)}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease', borderRadius: '8px' }}
               />
             </>
           ) : (
-            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999', fontSize: '14px' }}>No Image</div>
+            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999', fontSize: '14px', borderRadius: '8px', background: 'transparent', border: '1px dashed #d6d6d6' }}>No Image</div>
           )}
         </div>
 
