@@ -11,10 +11,19 @@ const Product = ({ product }) => {
   const v = product?._id
   const imageUrl = product?.image ? `${API_BASE_URL}${product.image}` : null
 
+  const handleHoverEnter = (e) => {
+    e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.15)'
+  }
+
+  const handleHoverLeave = (e) => {
+    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)'
+  }
+
   return (
-    <Card className="my-3 p-3 rounded">
-      <Link to={`/product/${v}`}>
-        <div style={{ position: 'relative', height: 200, overflow: 'hidden', background: '#f0f0f0' }}>
+    <Link to={`/product/${v}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <Card style={{ marginTop: '12px', marginBottom: '12px', padding: '0', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', display: 'flex', flexDirection: 'row', transition: 'box-shadow 0.3s ease', cursor: 'pointer', height: '220px' }} onMouseEnter={handleHoverEnter} onMouseLeave={handleHoverLeave}>
+        {/* Image Section - Left Side */}
+        <div style={{ position: 'relative', width: '220px', height: '220px', overflow: 'hidden', background: '#f0f0f0', flexShrink: 0 }}>
           {imageUrl && !imgError ? (
             <>
               {!loaded && (
@@ -26,33 +35,32 @@ const Product = ({ product }) => {
                 loading="lazy"
                 onLoad={() => setLoaded(true)}
                 onError={() => setImgError(true)}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: loaded ? 1 : 0, transition: 'opacity .3s ease' }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
               />
             </>
           ) : (
-            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999' }}>No Image</div>
+            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999', fontSize: '14px' }}>No Image</div>
           )}
         </div>
-      </Link>
 
-      <Card.Body>
-        <Link to={`/product/${v}`}>
-          <Card.Title as="div">
-            <strong>{product?.name}</strong>
+        {/* Details Section - Right Side */}
+        <Card.Body style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '16px', justifyContent: 'space-between' }}>
+          <Card.Title as="div" style={{ marginBottom: '8px' }}>
+            <strong style={{ fontSize: '18px', color: '#333', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{product?.name}</strong>
           </Card.Title>
-        </Link>
 
-        <Card.Text as="div">
-          <div className="my-3">
-            <Rating value={product?.rating || 0} text={`${product?.numReviews || 0} reviews`} color="#f8e825" />
-          </div>
-        </Card.Text>
+          <Card.Text as="div" style={{ flex: 1 }}>
+            <div style={{ marginTop: '8px' }}>
+              <Rating value={product?.rating || 0} text={`${product?.numReviews || 0} reviews`} color="#f8e825" />
+            </div>
+          </Card.Text>
 
-        <Card.Text as="h3">${product?.price ?? '0'}</Card.Text>
-      </Card.Body>
+          <Card.Text as="h3" style={{ fontSize: '20px', fontWeight: 'bold', color: '#ff6b6b', marginTop: '0', marginBottom: '0' }}>${product?.price ?? '0'}</Card.Text>
+        </Card.Body>
 
-      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
-    </Card>
+        <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
+      </Card>
+    </Link>
   )
 }
 

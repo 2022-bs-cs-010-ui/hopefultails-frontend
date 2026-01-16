@@ -48,13 +48,13 @@ const HomeScreen = () => {
             {loading ? (
               <Loader />
             ) : products.length > 0 ? (
-              <Row>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {products.map((val) => (
-                  <Col key={val?._id || Math.random()} sm={12} md={6} lg={4} xl={3}>
+                  <div key={val?._id || Math.random()} style={{ width: '100%' }}>
                     {val ? <Product product={val} /> : null}
-                  </Col>
+                  </div>
                 ))}
-              </Row>
+              </div>
             ) : (
               <Message variant="info">No products available.</Message>
             )}
