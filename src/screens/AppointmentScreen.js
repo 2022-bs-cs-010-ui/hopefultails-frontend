@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux'
 import Button from '@mui/material/Button';
 import Message from '../components/Message'
 import axios from 'axios'
-import Dropdown from 'react-bootstrap/Dropdown';
+// Dropdown removed (unused)
 
 const AppointmentScreen = ({match,history}) =>{
 
@@ -14,8 +14,7 @@ const AppointmentScreen = ({match,history}) =>{
 
     const [details,setDetails] = useState('')
     const [phoneNumber,setPhoneNumber] = useState('')
-    const [date,setDate] = useState('')
-    const [state,setState] = useState(1)
+    // date and state not required; removed to fix unused variable warnings
     const [error,setError] = useState()
     const [message,setMessage] = useState()
     const [slots,setSlots] = useState({})
@@ -26,9 +25,7 @@ const AppointmentScreen = ({match,history}) =>{
 
     useEffect(() => {
         
-        if(userInfo)
-        {
-          if (state===1){
+        if (userInfo) {
             async function postAppointment(){
                   
               try{
@@ -52,9 +49,7 @@ const AppointmentScreen = ({match,history}) =>{
               }
               
           }
-          postAppointment()
-
-          }
+            postAppointment()
             
         }
         else{
@@ -62,7 +57,7 @@ const AppointmentScreen = ({match,history}) =>{
         }
     
         
-    }, [history,userInfo,state,error,message])
+    }, [history, userInfo, id])
 
     const send =(e)=>{
         e.preventDefault()

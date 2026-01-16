@@ -64,7 +64,7 @@ const ProfileScreen = ({history}) =>{
             }
             else
             {
-                if (sta == "true"){
+                if (sta === "true"){
                     setSta("false")
                     if(!user || !user.name ||success || userInfo._id !== user._id)
                 {
@@ -80,7 +80,7 @@ const ProfileScreen = ({history}) =>{
                 }
                 
             }       
-    }, [dispatch,history,userInfo,user,success,orders,state,ordersSell])
+    }, [dispatch,history,userInfo,user,success,orders,state,ordersSell,sta])
 
     const send =(e)=>{
         e.preventDefault()

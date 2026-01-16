@@ -40,7 +40,7 @@ export default function Try(props) {
     googleMapsApiKey: "AIzaSyC3ALwqrIwXFt9C8iGfrBXxUkLYV-Uiccg",
     libraries,
   });
-  let windowFeatures = "popup";
+  // windowFeatures unused; removed to silence linter
   
   const [markers, setMarkers] = React.useState({});
   const [selected, setSelected] = React.useState(null);

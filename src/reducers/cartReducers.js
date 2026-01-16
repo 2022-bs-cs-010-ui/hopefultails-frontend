@@ -9,27 +9,20 @@ import {
 export const cartReducer = ( state = { cartItems :[], shippingAddress:{}, paymentMethod:{}  }, action ) => {
     switch(action.type){
     case ADD_TO_CART:
-        const item= action.payload
-        //console.log("payload data",latest)
-        const existItem= state.cartItems.find(x =>x.product=== item.product )
-        console.log("ye lo empty    ",state.cartItems.length)
-    if (state.cartItems.length < 1){
-        if(existItem)
-        {
-            return{
+        const item = action.payload
+        const existItem = state.cartItems.find(x => x.product === item.product)
+
+        if (existItem) {
+            return {
                 ...state,
-                cartItems:state.cartItems.map(x=>
-                    x.product=== existItem.product ? item : x) 
+                cartItems: state.cartItems.map(x => x.product === existItem.product ? item : x),
             }
         }
-        else
-        {
-            return{
-                ...state,
-                cartItems:[...state.cartItems,item]
-            }
-         }
-    }    
+
+        return {
+            ...state,
+            cartItems: [...state.cartItems, item],
+        }
     
 
     case REMOVE_FROM_CART:

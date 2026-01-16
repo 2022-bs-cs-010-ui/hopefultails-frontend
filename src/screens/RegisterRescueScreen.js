@@ -76,7 +76,7 @@ const RegisterRescueScreen = ({location,history}) =>{
                        'content-type': 'multipart/form-data',
                     }
                 }
-                  const result = await axios.post(
+                  await axios.post(
                     'http://127.0.0.1:8000/api/rescue/pic/',
                     formData,
                     config

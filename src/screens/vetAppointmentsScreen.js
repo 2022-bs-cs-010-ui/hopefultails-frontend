@@ -1,13 +1,10 @@
 import React, {useState,useEffect} from 'react';
-import {Table,Image,Row,Col} from 'react-bootstrap';
-import {LinkContainer} from 'react-router-bootstrap';
+import {Table} from 'react-bootstrap';
 import { useSelector} from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import axios from 'axios'
-import Button from '@mui/material/Button';
-
-import Rating from '../components/Rating'
+// removed unused imports: Image, Row, Col, LinkContainer, Button, Rating
 
 const VetAppointmentScreen = ({history}) =>{
 

@@ -1,6 +1,5 @@
 import React, { useState,useEffect} from 'react';
 import {Row,Col,Container,Form} from 'react-bootstrap';
-import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import axios from 'axios'
 
@@ -14,8 +13,7 @@ const AddPetScreen=({history})=>{
     const userLogin = useSelector(state=>state.userLogin)
     const {userInfo} = userLogin
 
-    const [tempVariant,setTempVariant] = useState("danger")
-    const [col,setCol] = useState()
+    const [col] = useState()
 
     const [name,setName] = useState('')
     const [price,setPrice] = useState()
@@ -25,25 +23,8 @@ const AddPetScreen=({history})=>{
     const [letter,setLetter] = useState()
     const [imageNow,setImageNow] = useState(true)
 
-    const Input = styled('input')({
-        display: 'none',
-      });
-
-    const setGrey = () =>{
-        setTempVariant("success")
-    }
-     
-    const setDanger = () =>{
-        setTempVariant("danger")
-    }
-
-    const setFormCol = () =>{
-        setCol("border border-danger")
-    }
-     
-    const setLeave = () =>{
-        setCol("")
-    }
+    // form column CSS helper
+    // keep `col` state for conditional class names; helpers removed (unused)
 
 
 

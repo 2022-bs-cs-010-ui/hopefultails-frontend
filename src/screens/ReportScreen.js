@@ -13,7 +13,6 @@ const ReportScreen = ({match,history}) =>{
     const [details,setDetails] = useState('')
     const [phoneNumber,setPhoneNumber] = useState('')
     const [location,setLocation] = useState('')
-    const [state,setState] = useState(1)
     const [error,setError] = useState()
     const [message,setMessage] = useState()
 
@@ -31,7 +30,7 @@ const ReportScreen = ({match,history}) =>{
         }
     
         
-    }, [history,userInfo,state,error,message])
+    }, [history,userInfo,error,message])
 
     const send =(e)=>{
         e.preventDefault()
