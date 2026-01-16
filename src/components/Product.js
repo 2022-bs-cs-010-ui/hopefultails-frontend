@@ -10,6 +10,10 @@ const Product = ({ product }) => {
   const [imgError, setImgError] = useState(false)
   const v = product?._id
   const imageUrl = product?.image ? `${API_BASE_URL}${product.image}` : null
+  const productName = product?.name || ''
+  const displayName = productName
+    ? productName.replace(/^(\S+)/, (match) => match.charAt(0).toUpperCase() + match.slice(1).toLowerCase())
+    : ''
 
   const handleHoverEnter = (e) => {
     e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.15)'
@@ -44,18 +48,22 @@ const Product = ({ product }) => {
         </div>
 
         {/* Details Section - Right Side */}
-        <Card.Body style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '16px', justifyContent: 'space-between' }}>
+        <Card.Body style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '16px', justifyContent: 'flex-start', gap: '2px' }}>
           <Card.Title as="div" style={{ marginBottom: '8px' }}>
-            <strong style={{ fontSize: '18px', color: '#333', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{product?.name}</strong>
+            <strong style={{ fontSize: '22px', color: '#333', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{displayName}</strong>
           </Card.Title>
 
-          <Card.Text as="div" style={{ flex: 1 }}>
-            <div style={{ marginTop: '8px' }}>
-              <Rating value={product?.rating || 0} text={`${product?.numReviews || 0} reviews`} color="#f8e825" />
-            </div>
+          <Card.Text as="h3" style={{ fontSize: '20px', fontWeight: 'bold', color: '#333333' }}>
+            ${product?.price ?? '0'}
           </Card.Text>
 
-          <Card.Text as="h3" style={{ fontSize: '20px', fontWeight: 'bold', color: '#ff6b6b', marginTop: '0', marginBottom: '0' }}>${product?.price ?? '0'}</Card.Text>
+          <Card.Text as="h5" style={{ fontSize: '12px', fontWeight: 'bold', color: '#333333', overflow: 'hidden', textOverflow: 'ellipsis', }}>
+            {product?.description ?? ''}
+          </Card.Text>
+
+          <Card.Text as="div">
+            <Rating value={product?.rating || 0} text={`${product?.numReviews || 0}`} color="#f8e825" />
+          </Card.Text>
         </Card.Body>
 
         <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
@@ -71,6 +79,7 @@ Product.propTypes = {
     image: PropTypes.string,
     rating: PropTypes.number,
     numReviews: PropTypes.number,
+    description: PropTypes.string,
     price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }).isRequired,
 }
