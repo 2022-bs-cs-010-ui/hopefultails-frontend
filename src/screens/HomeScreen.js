@@ -66,7 +66,7 @@ const HomeScreen = () => {
 
   return (
     <ErrorBoundary>
-      <div className="pt-3">
+      <h1 className="text-left">LATEST PRODUCTS</h1>
         <Row style={{ height: 'calc(100vh - 200px)' }}>
           <Col md={3} style={{ height: '100%' }}>
             <Card style={{ height: '100%' }}>
@@ -113,12 +113,11 @@ const HomeScreen = () => {
             </Card>
           </Col>
           <Col md={9} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-            <h1>LATEST PRODUCTS</h1>
             {error && <Message variant="danger">{error}</Message>}
             {loading && <Loader />}
             <div style={{ flex: 1, overflowY: 'auto', paddingRight: '8px' }}>
               {!loading && filteredProducts.length > 0 && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                   {filteredProducts.map((val, idx) => (
                     <div key={val?._id ?? idx} style={{ width: '100%' }}>
                       {val ? <Product product={val} /> : null}
@@ -132,7 +131,6 @@ const HomeScreen = () => {
             </div>
           </Col>
         </Row>
-      </div>
     </ErrorBoundary>
   )
 }
